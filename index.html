@@ -72,6 +72,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     html, body {
       background-color: var(--bg);
       color: var(--text);
@@ -167,13 +171,15 @@
     .store-area {
       margin-top: 26px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
+      gap: 10px;
     }
 
     .store-badge {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       padding: 11px 22px;
       border: 1px solid var(--text);
       border-radius: 8px;
@@ -433,6 +439,158 @@
       border-top: 1px solid var(--border);
     }
 
+    /* ===== Closed Testing Section ===== */
+    .tester-box {
+      background-color: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .tester-lead {
+      font-size: 13.5px;
+      color: var(--sub);
+      line-height: 1.8;
+    }
+
+    .tester-lead + .tester-lead {
+      margin-top: 10px;
+    }
+
+    .tester-steps {
+      margin-top: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .tester-step {
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .tester-step-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .tester-step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: var(--text);
+      color: var(--paper);
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .tester-step-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .tester-step-sub {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--sub);
+      margin-top: 2px;
+    }
+
+    .tester-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-left: 34px;
+    }
+
+    .tester-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border: 1px solid var(--text);
+      border-radius: 8px;
+      background-color: var(--paper);
+      color: var(--text);
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+    }
+
+    .tester-btn:hover {
+      background-color: var(--text);
+      color: var(--paper);
+    }
+
+    .tester-btn.primary {
+      background-color: var(--text);
+      color: var(--paper);
+    }
+
+    .tester-btn.primary:hover {
+      background-color: var(--paper);
+      color: var(--text);
+    }
+
+    .tester-step2-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-left: 34px;
+    }
+
+    .tester-step2-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .tester-qr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .tester-qr img {
+      width: 112px;
+      height: 112px;
+      display: block;
+      padding: 6px;
+      background-color: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .tester-qr span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tester-note {
+      margin-top: 16px;
+      font-size: 11.5px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
     /* ===== Footer ===== */
     footer {
       border-top: 1px solid var(--border);
@@ -514,6 +672,21 @@
         width: 42px;
         height: 42px;
       }
+      .tester-box {
+        padding: 22px 16px;
+      }
+      .tester-actions {
+        padding-left: 0;
+      }
+      .tester-step2-body {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 0;
+      }
+      .tester-qr {
+        align-self: center;
+        margin-top: 6px;
+      }
     }
   </style>
 </head>
@@ -558,7 +731,8 @@
 
       <div class="store-area">
         <span class="store-badge coming-soon">GOOGLE PLAY &middot; COMING SOON</span>
-        <!-- 公開時に上の span を消して下の a を有効化
+        <a class="store-badge" href="#closed-test">CLOSED TEST &darr;</a>
+        <!-- 公開時に上の span と closed-test リンクを消して下の a を有効化
         <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.bonsai.tdm" target="_blank" rel="noopener noreferrer">
           GET IT ON GOOGLE PLAY &rarr;
         </a>
@@ -696,12 +870,72 @@
       </div>
     </section>
 
+    <!-- 4. Closed Testing Recruitment (EN / JA) -->
+    <section id="closed-test" aria-label="Closed Testing">
+      <p class="section-label">CLOSED TESTING / 先行テスター募集</p>
+      <div class="tester-box">
+        <p class="tester-lead" lang="en">
+          Ahead of the public release on Google Play, we are looking for volunteer testers to try memo-nari on Android. It is completely free, and you can opt out at any time.
+        </p>
+        <p class="tester-lead" lang="ja">
+          Google Playでの一般公開に向けて、Android端末で動作をお試しいただける先行テスターを募集しています。専門知識は不要で、無料で参加・いつでも解除できます。
+        </p>
+
+        <div class="tester-steps">
+          <!-- Step 1 -->
+          <div class="tester-step">
+            <div class="tester-step-head">
+              <span class="tester-step-badge">1</span>
+              <div class="tester-step-title">
+                Join the Tester Group
+                <span class="tester-step-sub" lang="ja">先行モニター用Googleグループに参加する</span>
+              </div>
+            </div>
+            <div class="tester-actions">
+              <a class="tester-btn primary" href="https://groups.google.com/g/bonsaiproject2026/about" target="_blank" rel="noopener noreferrer">
+                Join Google Group / グループに参加 &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="tester-step">
+            <div class="tester-step-head">
+              <span class="tester-step-badge">2</span>
+              <div class="tester-step-title">
+                Opt in &amp; Install on Google Play
+                <span class="tester-step-sub" lang="ja">テスター登録してアプリをインストールする</span>
+              </div>
+            </div>
+            <div class="tester-step2-body">
+              <div class="tester-step2-links">
+                <a class="tester-btn" href="https://play.google.com/apps/testing/com.bonsai.tdm" target="_blank" rel="noopener noreferrer">
+                  For Closed Testers / テスト参加者用URL &rarr;
+                </a>
+                <a class="tester-btn" href="https://play.google.com/store/apps/details?id=com.bonsai.tdm" target="_blank" rel="noopener noreferrer">
+                  Open in Google Play / Google Playで開く &rarr;
+                </a>
+              </div>
+              <div class="tester-qr">
+                <img src="qr_tdm.png" alt="Closed Testing QR Code / 参加者スマホ用QRコード" onerror="this.parentElement.style.display='none';">
+                <span>Android QR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="tester-note">
+          Requires a Google account on Android. / Android端末とGoogleアカウントでのログインが必要です。
+        </p>
+      </div>
+    </section>
+
   </main>
 
   <!-- ===== FOOTER ===== -->
   <footer>
     <a class="footer-brand" href="https://mizotan.github.io/bonsaiproject/">
-      <img src="rogo.png" width="36" height="36">
+      <img src="rogo.png" width="36" height="36" alt="BONSAI PROJECT">
       <span>BONSAI PROJECT / 盆栽企画</span>
     </a>
 
