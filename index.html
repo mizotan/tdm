@@ -1,0 +1,2510 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onomatopoeia Station — Offline Japanese Onomatopoeia Translator | BONSAI PROJECT</title>
+
+  <!-- 1. SEO & Meta -->
+  <meta name="description" content="Onomatopoeia Station / OMP — Offline multilingual Japanese onomatopoeia translator for Android. 529 words across 7 categories, 40 languages, voice search, sound and haptic feel, CRT oscilloscope, and on-device ML Kit translation by BONSAI PROJECT.">
+  <meta name="keywords" content="Onomatopoeia Station,OMP,オノマトペステーション,Japanese Onomatopoeia,オノマトペ,Offline Translator,Android App,BONSAI PROJECT,盆栽企画">
+  <meta name="author" content="BONSAI PROJECT · 盆栽企画">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#141619">
+
+  <!-- 2. Canonical & Alternate -->
+  <link rel="canonical" href="https://mizotan.github.io/omp/">
+  <link rel="alternate" hreflang="en" href="https://mizotan.github.io/omp/">
+  <link rel="alternate" hreflang="ja" href="https://mizotan.github.io/omp/">
+  <link rel="alternate" hreflang="x-default" href="https://mizotan.github.io/omp/">
+
+  <!-- 3. Favicon -->
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <!-- 4. OGP / Twitter Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Onomatopoeia Station — BONSAI PROJECT">
+  <meta property="og:title" content="Onomatopoeia Station / OMP — Offline Japanese Onomatopoeia Translator">
+  <meta property="og:description" content="500 Over Japanese onomatopoeia words · 7 categories · 40 languages · 100% offline on Android. Hear, feel, and decode Japanese sound words.">
+  <meta property="og:url" content="https://mizotan.github.io/omp/">
+  <meta property="og:image" content="https://mizotan.github.io/omp/icon.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Onomatopoeia Station / OMP — Offline Japanese Onomatopoeia Translator">
+  <meta name="twitter:description" content="500 Over words · 7 categories · 40 languages · Voice search, haptic feel & CRT waveform.">
+  <meta name="twitter:image" content="https://mizotan.github.io/omp/icon.png">
+
+  <!-- 5. Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Onomatopoeia Station",
+    "alternateName": "オノマトペステーション / OMP",
+    "url": "https://mizotan.github.io/omp/",
+    "image": "https://mizotan.github.io/omp/icon.png",
+    "applicationCategory": "ReferenceApplication",
+    "operatingSystem": "Android",
+    "description": "Offline multilingual Japanese onomatopoeia translator with 500+ Words words across 7 categories, 40 languages, voice input, sound and vibration feedback, and CRT oscilloscope display.",
+    "inLanguage": ["en", "ja"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "BONSAI PROJECT",
+      "alternateName": "盆栽企画",
+      "url": "https://mizotan.github.io/bonsaiproject/",
+      "logo": "https://mizotan.github.io/bonsaiproject/rogo.png",
+      "email": "bonsai.project.2026@gmail.com"
+    }
+  }
+  </script>
+
+  <!-- Fonts: Noto Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* 1. 基本UI・盤面：無彩色 */
+      --bg-base: #F2F4F6;
+      --bg-card: #FFFFFF;
+      --bg-sub: #E8ECEF;
+      --ink-main: #141619;
+      --ink-muted: #5A626A;
+      --border-soft: #CFD5DC;
+      --line-bold: 3px;
+      --line-mid: 2px;
+
+      /* 2. ピクトグラム専用：藍寄りブルー＋白 */
+      --picto-blue: #1B4978;
+      --picto-soft: #EBF1F6;
+
+      /* 3. 録音・最重要アクション専用：工業デザインの赤 */
+      --rec-red: #C62828;
+      --rec-red-dark: #9E1F1F;
+
+      /* 4. オシロスコープ専用：黒＋CRT緑 */
+      --scope-bg: #07100A;
+      --scope-border: #2B332E;
+      --scope-wave: #33FF66;
+
+      --font-body: 'Noto Serif', 'Noto Serif JP', Georgia, serif;
+      --font-mono: 'Courier New', Consolas, monospace;
+      --rail-width: 228px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-base);
+      color: var(--ink-main);
+      font-family: var(--font-body);
+      line-height: 1.65;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      color: var(--ink-main);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* =========================================================
+       LAYOUT SHELL: MAIN COLUMN + RIGHT FIXED STATION RAIL
+       ========================================================= */
+    .site-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--rail-width);
+      min-height: 100vh;
+    }
+
+    .main-column {
+      min-width: 0;
+      border-right: var(--line-bold) solid var(--ink-main);
+      background: var(--bg-base);
+    }
+
+    /* Mobile Top Bar */
+    .mobile-bar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 120;
+      background: var(--ink-main);
+      color: #FFFFFF;
+      border-bottom: var(--line-bold) solid var(--ink-main);
+      padding: 10px 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mobile-bar-brand {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+    .mobile-menu-btn {
+      background: #FFFFFF;
+      color: var(--ink-main);
+      border: 2px solid #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      padding: 5px 12px;
+      cursor: pointer;
+    }
+
+    /* Right Fixed Navigation Rail (PC) */
+    .side-rail {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .rail-head {
+      background: var(--ink-main);
+      color: #FFFFFF;
+      padding: 18px 18px 16px;
+      border-bottom: var(--line-bold) solid var(--ink-main);
+    }
+    .rail-code {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      opacity: 0.72;
+      margin-bottom: 4px;
+    }
+    .rail-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+
+    .rail-nav {
+      display: flex;
+      flex-direction: column;
+    }
+    .rail-link {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 18px;
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--ink-main);
+      background: var(--bg-card);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .rail-link:hover {
+      background: var(--ink-main);
+      color: #FFFFFF;
+    }
+    .rail-link.rail-link-accent {
+      background: var(--picto-soft);
+      color: var(--picto-blue);
+    }
+    .rail-link.rail-link-accent:hover {
+      background: var(--rec-red);
+      color: #FFFFFF;
+    }
+    .rail-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+    .rail-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+
+    .rail-sub-links {
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-bottom: var(--line-mid) solid var(--ink-main);
+      background: var(--bg-base);
+    }
+    .rail-sub-links a {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      color: var(--ink-main);
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+    }
+    .rail-sub-links a:hover {
+      text-decoration: underline;
+    }
+
+    .rail-vertical-sign {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 18px 10px;
+      overflow: hidden;
+      user-select: none;
+      background: var(--bg-card);
+    }
+    .rail-vertical-text {
+      writing-mode: vertical-rl;
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: transparent;
+      -webkit-text-stroke: 1.2px var(--ink-main);
+      opacity: 0.22;
+      line-height: 1;
+    }
+
+    /* =========================================================
+       STATION HEADER / HERO
+       ========================================================= */
+    .station-top-band {
+      background: var(--ink-main);
+      color: #FFFFFF;
+      padding: 12px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: var(--line-bold) solid var(--ink-main);
+    }
+    .band-left {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+    }
+    .band-right {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      opacity: 0.85;
+    }
+
+    .hero-section {
+      background: var(--bg-card);
+      border-bottom: var(--line-bold) solid var(--ink-main);
+      padding: 44px 36px 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 124px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .hero-icon-box {
+      width: 124px;
+      height: 124px;
+      border: var(--line-bold) solid var(--ink-main);
+      background: var(--bg-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-icon-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--ink-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 5vw, 54px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: 0.04em;
+      color: var(--ink-main);
+    }
+    .hero-title-ja {
+      font-size: clamp(16px, 2.2vw, 22px);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--ink-main);
+      margin-top: 8px;
+      padding-bottom: 16px;
+      border-bottom: var(--line-mid) solid var(--ink-main);
+    }
+
+    .hero-lead-en {
+      font-size: 16px;
+      color: var(--ink-main);
+      margin-top: 16px;
+      max-width: 680px;
+    }
+    .hero-lead-ja {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-top: 6px;
+      max-width: 680px;
+    }
+
+    .hero-spec-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 24px;
+      border: var(--line-mid) solid var(--ink-main);
+      background: var(--bg-base);
+    }
+    .hero-spec-cell {
+      padding: 10px 12px;
+      border-right: var(--line-mid) solid var(--ink-main);
+    }
+    .hero-spec-cell:last-child {
+      border-right: none;
+    }
+    .spec-val {
+      font-family: var(--font-mono);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink-main);
+      line-height: 1.2;
+    }
+    .spec-lbl {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+
+    .hero-cta-row {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .status-plate {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink-main);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      padding: 12px 18px;
+      border: var(--line-mid) solid var(--ink-main);
+    }
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--scope-wave);
+    }
+    /* 最重要アクション用REC赤ボタン */
+    .btn-play-red {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--rec-red);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 12px 20px;
+      border: var(--line-mid) solid var(--rec-red);
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .btn-play-red:hover {
+      background: var(--rec-red-dark);
+      border-color: var(--rec-red-dark);
+    }
+    .btn-station-blue {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--picto-blue);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 11px 18px;
+      border: var(--line-mid) solid var(--picto-blue);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .btn-station-blue:hover {
+      background: var(--ink-main);
+      border-color: var(--ink-main);
+    }
+    .btn-station-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      color: var(--ink-main);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 11px 18px;
+      border: var(--line-mid) solid var(--ink-main);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .btn-station-outline:hover {
+      background: var(--ink-main);
+      color: #FFFFFF;
+    }
+    .cta-note {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-muted);
+      letter-spacing: 0.08em;
+      width: 100%;
+    }
+
+    /* =========================================================
+       DEPARTURE TICKER BAND (ALL 50 LANGUAGE STATIONS)
+       ========================================================= */
+    .ticker-band {
+      background: var(--bg-sub);
+      border-bottom: var(--line-bold) solid var(--ink-main);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: 40px;
+    }
+    .ticker-tag {
+      background: var(--ink-main);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      padding: 0 16px;
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+    .ticker-viewport {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      padding-left: 24px;
+      animation: ompTicker 68s linear infinite;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-main);
+    }
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .ticker-code {
+      font-weight: 700;
+      background: var(--bg-card);
+      border: 1px solid var(--ink-main);
+      padding: 1px 5px;
+      font-size: 10px;
+    }
+    @keyframes ompTicker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* =========================================================
+       CRT OSCILLOSCOPE & ONOMATOPOEIA AUDIO DEMO
+       ========================================================= */
+    .demo-section {
+      background: var(--bg-base);
+      border-bottom: var(--line-bold) solid var(--ink-main);
+      padding: 28px 36px 32px;
+    }
+    .demo-top-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .demo-heading {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--ink-main);
+    }
+    .demo-sub {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .scope-bezel {
+      position: relative;
+      width: 100%;
+      height: 76px;
+      background: var(--scope-bg);
+      border: var(--line-bold) solid var(--ink-main);
+      overflow: hidden;
+    }
+    #scopeCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .scope-hud {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+    .scope-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .scope-led {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2C5E3B;
+      transition: background-color 0.15s ease;
+    }
+    .scope-bezel.is-playback .scope-led {
+      background: var(--scope-wave);
+    }
+    .scope-label,
+    .scope-active-word {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: rgba(51, 255, 102, 0.88);
+    }
+
+    .demo-btn-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 12px;
+      border: var(--line-mid) solid var(--ink-main);
+      background: var(--bg-card);
+    }
+    .demo-word-btn {
+      appearance: none;
+      border: none;
+      border-right: var(--line-mid) solid var(--ink-main);
+      background: var(--bg-card);
+      color: var(--ink-main);
+      padding: 14px 12px;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background-color 0.12s ease, color 0.12s ease;
+    }
+    .demo-word-btn:last-child {
+      border-right: none;
+    }
+    .demo-word-btn:hover,
+    .demo-word-btn.is-active {
+      background: var(--ink-main);
+      color: #FFFFFF;
+    }
+    .demo-word-btn:active {
+      background: var(--rec-red);
+      color: #FFFFFF;
+    }
+    .dw-jp {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .dw-romaji {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+      opacity: 0.78;
+    }
+    .dw-sense {
+      display: block;
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: 0.72;
+    }
+
+    /* =========================================================
+       CLOSED TEST / PRE-RELEASE BOARDING PLATFORM
+       ========================================================= */
+    .test-board {
+      border: var(--line-bold) solid var(--ink-main);
+      background: var(--bg-card);
+    }
+    .test-board-head {
+      background: var(--picto-blue);
+      color: #FFFFFF;
+      padding: 14px 22px;
+      border-bottom: var(--line-mid) solid var(--ink-main);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .test-board-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+    .test-board-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      background: #FFFFFF;
+      color: var(--picto-blue);
+      padding: 3px 10px;
+    }
+    .test-board-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+    }
+    .test-board-main {
+      padding: 24px;
+      border-right: var(--line-mid) solid var(--ink-main);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .test-lead-ja {
+      font-size: 14px;
+      color: var(--ink-main);
+      line-height: 1.7;
+    }
+    .test-lead-en {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 4px;
+    }
+    .test-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .test-step-row {
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-base);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .test-step-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .test-step-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      background: var(--ink-main);
+      color: #FFFFFF;
+      padding: 2px 8px;
+      flex-shrink: 0;
+    }
+    .test-step-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-main);
+    }
+    .test-step-desc {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+    .test-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .test-qr-pane {
+      padding: 24px 20px;
+      background: var(--bg-sub);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
+    }
+    .test-qr-frame {
+      width: 162px;
+      height: 162px;
+      background: #FFFFFF;
+      border: var(--line-mid) solid var(--ink-main);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .test-qr-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .test-qr-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--ink-main);
+    }
+    .test-qr-sub {
+      font-size: 11px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+    .test-board-foot {
+      border-top: var(--line-mid) solid var(--ink-main);
+      background: var(--bg-base);
+      padding: 12px 22px;
+      font-size: 11px;
+      color: var(--ink-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* =========================================================
+       SECTION HEADER FRAME (GIANT TITLE SEATED ON BOLD RULE)
+       ========================================================= */
+    .station-section {
+      border-bottom: var(--line-bold) solid var(--ink-main);
+      background: var(--bg-base);
+    }
+
+    .section-head-band {
+      background: var(--bg-card);
+      border-bottom: var(--line-bold) solid var(--ink-main);
+      padding: 28px 36px 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .section-title-group {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      transform: translateY(4px);
+    }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--ink-main);
+      color: #FFFFFF;
+      padding: 4px 10px;
+      letter-spacing: 0.12em;
+    }
+    .section-num.section-num-red {
+      background: var(--rec-red);
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.05em;
+      color: var(--ink-main);
+    }
+    .section-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--ink-muted);
+      padding-bottom: 10px;
+    }
+
+    .section-body {
+      padding: 32px 36px 40px;
+    }
+
+    /* =========================================================
+       01 OVERVIEW: 4-CELL STATION GRID
+       ========================================================= */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border: var(--line-bold) solid var(--ink-main);
+      background: var(--bg-card);
+    }
+    .overview-cell {
+      padding: 24px 24px 26px;
+      border-right: var(--line-mid) solid var(--ink-main);
+      border-bottom: var(--line-mid) solid var(--ink-main);
+    }
+    .overview-cell:nth-child(2n) {
+      border-right: none;
+    }
+    .overview-cell:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+    .ov-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      margin-bottom: 8px;
+    }
+    .ov-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink-main);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .ov-en {
+      font-size: 14px;
+      color: var(--ink-main);
+      margin-bottom: 8px;
+    }
+    .ov-ja {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    /* =========================================================
+       02 CATEGORIES: PICTOGRAM BLUE #1B4978 DEDICATED ZONE
+       ========================================================= */
+    .cat-intro {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .cat-intro-en {
+      font-size: 15px;
+      color: var(--ink-main);
+      max-width: 620px;
+    }
+    .cat-intro-ja {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 4px;
+    }
+    .picto-count-badge {
+      background: var(--picto-blue);
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      padding: 8px 14px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .cat-card {
+      background: var(--bg-card);
+      border: var(--line-mid) solid var(--picto-blue);
+      display: flex;
+      flex-direction: column;
+    }
+    .cat-card-top {
+      background: var(--picto-blue);
+      color: #FFFFFF;
+      padding: 16px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .cat-picto-wrap {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cat-picto-wrap img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    .cat-fallback {
+      display: none;
+      font-size: 26px;
+      line-height: 1;
+      color: #FFFFFF;
+    }
+    .cat-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      opacity: 0.85;
+    }
+    .cat-card-body {
+      padding: 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--bg-card);
+    }
+    .cat-name-en {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--picto-blue);
+      text-transform: uppercase;
+    }
+    .cat-name-ja {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-main);
+      margin-top: 3px;
+    }
+    .cat-samples {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-muted);
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-soft);
+    }
+    .cat-card-summary {
+      background: var(--picto-soft);
+      border: var(--line-mid) solid var(--picto-blue);
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .cat-summary-num {
+      font-family: var(--font-mono);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--picto-blue);
+      line-height: 1.1;
+    }
+    .cat-summary-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--ink-main);
+      margin-top: 6px;
+    }
+    .cat-summary-ja {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-top: 6px;
+    }
+
+    /* =========================================================
+       03 VISUAL GUIDE: IKEA-STYLE 6-PANEL MANUAL
+       ========================================================= */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: var(--line-bold) solid var(--ink-main);
+      background: var(--bg-card);
+    }
+    .guide-panel {
+      padding: 18px 16px 16px;
+      border-right: var(--line-mid) solid var(--ink-main);
+      border-bottom: var(--line-mid) solid var(--ink-main);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      background: var(--bg-card);
+    }
+    .guide-panel:nth-child(3n) {
+      border-right: none;
+    }
+    .guide-panel:nth-last-child(-n+3) {
+      border-bottom: none;
+    }
+    .guide-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .guide-step {
+      width: 26px;
+      height: 26px;
+      border: 2px solid var(--picto-blue);
+      color: var(--picto-blue);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .guide-cap-en {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-main);
+    }
+    .ikea-svg {
+      width: 100%;
+      height: 112px;
+      stroke: var(--picto-blue);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      margin: 6px 0 10px;
+    }
+    .ikea-svg .ink-stroke { stroke: var(--ink-main); }
+    .ikea-svg .muted { stroke: var(--ink-muted); stroke-dasharray: 3 3; }
+    .ikea-svg .picto-stroke { stroke: var(--picto-blue); }
+    .ikea-svg .white-stroke { stroke: #FFFFFF; }
+    .ikea-svg .fill-soft { fill: var(--bg-base); stroke: var(--border-soft); }
+    .ikea-svg .fill-picto { fill: var(--picto-blue); stroke: var(--picto-blue); }
+    .ikea-svg .fill-picto-soft { fill: var(--picto-soft); stroke: var(--picto-blue); }
+    .ikea-svg .fill-ink { fill: var(--ink-main); stroke: var(--ink-main); }
+    .ikea-svg .fill-rec { fill: var(--rec-red); stroke: var(--rec-red); }
+    .ikea-svg .fill-scope { fill: var(--scope-bg); stroke: var(--ink-main); }
+    .ikea-svg .wave-stroke { stroke: var(--scope-wave); stroke-width: 1.5; }
+    .ikea-svg text { fill: var(--ink-main); stroke: none; font-family: var(--font-mono); font-weight: 700; }
+    .ikea-svg text.picto-txt { fill: var(--picto-blue); }
+    .ikea-svg text.white-txt { fill: #FFFFFF; }
+
+    .guide-cap-ja {
+      font-size: 12px;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--border-soft);
+      padding-top: 8px;
+    }
+
+    /* =========================================================
+       04 40 LANGUAGES / 50 STATIONS BOARD
+       ========================================================= */
+    .lang-board-note {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .lang-board-en {
+      font-size: 14px;
+      color: var(--ink-main);
+    }
+    .lang-board-ja {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .station-lang-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: var(--line-bold) solid var(--ink-main);
+      border-left: var(--line-bold) solid var(--ink-main);
+      background: var(--bg-card);
+    }
+    .station-lang-cell {
+      border-right: var(--line-mid) solid var(--ink-main);
+      border-bottom: var(--line-mid) solid var(--ink-main);
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--bg-card);
+    }
+    .station-lang-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .st-no {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--ink-main);
+      color: #FFFFFF;
+      padding: 2px 5px;
+      flex-shrink: 0;
+    }
+    .st-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .st-code {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+
+    /* Spec Table */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 28px;
+      background: var(--bg-card);
+      border: var(--line-bold) solid var(--ink-main);
+    }
+    .spec-table th,
+    .spec-table td {
+      border-bottom: 1.5px solid var(--ink-main);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 13px;
+    }
+    .spec-table tr:last-child th,
+    .spec-table tr:last-child td {
+      border-bottom: none;
+    }
+    .spec-table th {
+      width: 28%;
+      background: var(--bg-sub);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      border-right: var(--line-mid) solid var(--ink-main);
+    }
+
+    /* =========================================================
+       05 TRANSFER & FOOTER
+       ========================================================= */
+    .transfer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: var(--line-bold) solid var(--ink-main);
+      background: var(--bg-card);
+    }
+    .transfer-card {
+      padding: 22px 20px;
+      border-right: var(--line-mid) solid var(--ink-main);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .transfer-card:last-child {
+      border-right: none;
+    }
+    .transfer-card:hover {
+      background: var(--ink-main);
+      color: #FFFFFF;
+    }
+    .tr-line {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      opacity: 0.7;
+    }
+    .tr-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .tr-ja {
+      font-size: 12px;
+      opacity: 0.78;
+      margin-top: 3px;
+    }
+    .tr-arrow {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      align-self: flex-end;
+    }
+
+    .site-footer {
+      background: var(--ink-main);
+      color: #FFFFFF;
+      padding: 28px 36px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+    .footer-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      background: #000000;
+      padding: 3px;
+    }
+    .footer-brand-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+    .footer-brand-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      opacity: 0.72;
+      margin-top: 2px;
+    }
+    .footer-right {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+    .footer-right a {
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .site-shell {
+        grid-template-columns: 1fr;
+      }
+      .main-column {
+        border-right: none;
+      }
+      .mobile-bar {
+        display: flex;
+      }
+      .side-rail {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 260px;
+        max-width: 82vw;
+        border-left: var(--line-bold) solid var(--ink-main);
+        transform: translateX(100%);
+        transition: transform 0.22s ease;
+      }
+      .side-rail.is-open {
+        transform: translateX(0);
+      }
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .guide-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .guide-panel:nth-child(3n) {
+        border-right: var(--line-mid) solid var(--ink-main);
+      }
+      .guide-panel:nth-child(2n) {
+        border-right: none;
+      }
+      .guide-panel:nth-last-child(-n+3) {
+        border-bottom: var(--line-mid) solid var(--ink-main);
+      }
+      .guide-panel:nth-last-child(-n+2) {
+        border-bottom: none;
+      }
+      .station-lang-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .station-top-band,
+      .hero-section,
+      .demo-section,
+      .section-head-band,
+      .section-body,
+      .site-footer {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .hero-icon-box {
+        width: 96px;
+        height: 96px;
+      }
+      .hero-spec-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-spec-cell:nth-child(2n) {
+        border-right: none;
+      }
+      .hero-spec-cell:nth-child(-n+2) {
+        border-bottom: var(--line-mid) solid var(--ink-main);
+      }
+      .demo-btn-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .demo-word-btn:nth-child(2n) {
+        border-right: none;
+      }
+      .demo-word-btn:nth-child(-n+2) {
+        border-bottom: var(--line-mid) solid var(--ink-main);
+      }
+      .test-board-grid {
+        grid-template-columns: 1fr;
+      }
+      .test-board-main {
+        border-right: none;
+        border-bottom: var(--line-mid) solid var(--ink-main);
+        padding: 18px;
+      }
+      .overview-grid,
+      .guide-grid,
+      .station-lang-grid,
+      .transfer-grid {
+        grid-template-columns: 1fr;
+      }
+      .overview-cell,
+      .guide-panel,
+      .transfer-card {
+        border-right: none !important;
+        border-bottom: var(--line-mid) solid var(--ink-main) !important;
+      }
+      .overview-cell:last-child,
+      .guide-panel:last-child,
+      .transfer-card:last-child {
+        border-bottom: none !important;
+      }
+      .spec-table th,
+      .spec-table td {
+        display: block;
+        width: 100%;
+        border-right: none;
+      }
+      .footer-right {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mobile Top Bar -->
+  <div class="mobile-bar">
+    <div class="mobile-bar-brand">OMP / ONOMATOPOEIA STATION</div>
+    <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-controls="sideRail">INDEX</button>
+  </div>
+
+  <div class="site-shell">
+    <!-- =========================================================
+         MAIN CONTENT COLUMN
+         ========================================================= -->
+    <div class="main-column">
+
+      <!-- Top Station Band -->
+      <div class="station-top-band">
+        <div class="band-left">BONSAI PROJECT · STATION 07 / OMP</div>
+        <div class="band-right">OFFLINE JAPANESE ONOMATOPOEIA TRANSLATOR</div>
+      </div>
+
+      <!-- HERO -->
+      <header class="hero-section" id="top">
+        <div class="hero-grid">
+          <div class="hero-icon-box">
+            <img src="icon.png" alt="Onomatopoeia Station App Icon" onerror="this.src='https://mizotan.github.io/bonsaiproject/rogo.png'">
+          </div>
+          <div>
+            <div class="hero-eyebrow">MADE IN JAPAN · STATION SIGNAGE DESIGN · ANDROID</div>
+            <h1 class="hero-title">Onomatopoeia Station</h1>
+            <div class="hero-title-ja">オノマトペステーション · OMP</div>
+            <p class="hero-lead-en">
+              Decode Japanese sound words offline. Speak or type any onomatopoeia you hear in food, weather, manga, or daily life — hear it, feel its vibration, and translate it on-device across 40 languages.
+            </p>
+            <p class="hero-lead-ja">
+              日本のオノマトペをオフラインで紐解く多言語Androidアプリ。音声・テキスト検索から発音、音とバイブによる体感、CRT波形表示、オンデバイス翻訳までを駅サインの機能美で統合。
+            </p>
+
+            <div class="hero-spec-bar">
+              <div class="hero-spec-cell">
+                <div class="spec-val">500+ Words</div>
+                <div class="spec-lbl">WORDS / 収録語</div>
+              </div>
+              <div class="hero-spec-cell">
+                <div class="spec-val">07</div>
+                <div class="spec-lbl">CATEGORIES / 分類</div>
+              </div>
+              <div class="hero-spec-cell">
+                <div class="spec-val">40</div>
+                <div class="spec-lbl">LANGUAGES / 50選択肢</div>
+              </div>
+              <div class="hero-spec-cell">
+                <div class="spec-val">OFFLINE</div>
+                <div class="spec-lbl">ML KIT ON-DEVICE</div>
+              </div>
+            </div>
+
+            <div class="hero-cta-row">
+              <span class="status-plate">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>CLOSED TEST · NOW BOARDING</span>
+              </span>
+              <a href="#closed-test" class="btn-play-red">
+                <span>▶ JOIN CLOSED TEST / 先行プレイに参加</span>
+              </a>
+              <!-- ★一般公開時は上の2要素を以下に差し替えてください
+              <a href="https://play.google.com/store/apps/details?id=com.bonsai.omp" class="btn-play-red" target="_blank" rel="noopener noreferrer">
+                <span>▶ GET IT ON GOOGLE PLAY</span>
+              </a>
+              -->
+              <span class="cta-note">FREE ANDROID APP · AD-SUPPORTED · PRE-RELEASE TESTING OPEN</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DEPARTURE TICKER BAND -->
+      <div class="ticker-band" aria-label="40 Languages Departure Ticker">
+        <div class="ticker-tag">JP → 50 STATIONS</div>
+        <div class="ticker-viewport">
+          <div class="ticker-track" id="tickerTrack"></div>
+        </div>
+      </div>
+
+      <!-- CRT OSCILLOSCOPE & INTERACTIVE DEMO -->
+      <section class="demo-section" aria-label="CRT Oscilloscope Audio Preview">
+        <div class="demo-top-row">
+          <div class="demo-heading">CRT AUDIO MONITOR · TAP TO FEEL ONOMATOPOEIA</div>
+          <div class="demo-sub">代表オノマトペの簡易体感デモ · 音と波形でニュアンスをプレビュー</div>
+        </div>
+
+        <div class="scope-bezel" id="scopeBezel">
+          <canvas id="scopeCanvas"></canvas>
+          <div class="scope-hud">
+            <div class="scope-status">
+              <span class="scope-led" id="scopeLed"></span>
+              <span class="scope-label" id="scopeLabel">READY</span>
+            </div>
+            <div class="scope-active-word" id="scopeWord">STANDBY · 440HZ REF</div>
+          </div>
+        </div>
+
+        <div class="demo-btn-grid">
+          <button type="button" class="demo-word-btn" data-demo="paripari">
+            <span class="dw-jp">パリパリ</span>
+            <span class="dw-romaji">Pari-pari · CRISP</span>
+            <span class="dw-sense">Dry, crisp snap / 海苔や薄い菓子の歯切れ</span>
+          </button>
+          <button type="button" class="demo-word-btn" data-demo="mochimochi">
+            <span class="dw-jp">もちもち</span>
+            <span class="dw-romaji">Mochi-mochi · CHEWY</span>
+            <span class="dw-sense">Soft, elastic bounce / 餅やパンの弾力</span>
+          </button>
+          <button type="button" class="demo-word-btn" data-demo="gorogoro">
+            <span class="dw-jp">ゴロゴロ</span>
+            <span class="dw-romaji">Goro-goro · RUMBLE</span>
+            <span class="dw-sense">Low rolling thunder / 雷鳴や重い転がり</span>
+          </button>
+          <button type="button" class="demo-word-btn" data-demo="kirakira">
+            <span class="dw-jp">キラキラ</span>
+            <span class="dw-romaji">Kira-kira · SPARKLE</span>
+            <span class="dw-sense">Bright twinkling light / 光のきらめき</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           00 CLOSED TEST (PRE-RELEASE BOARDING)
+           ========================================================= -->
+      <section class="station-section" id="closed-test">
+        <div class="section-head-band">
+          <div class="section-title-group">
+            <span class="section-num section-num-red">00</span>
+            <h2 class="section-title">CLOSED TEST</h2>
+          </div>
+          <div class="section-meta">PRE-RELEASE BOARDING / 先行プレイ（クローズドテスト）</div>
+        </div>
+
+        <div class="section-body">
+          <div class="test-board">
+            <div class="test-board-head">
+              <div class="test-board-title">TRIAL RUN PLATFORM · ANDROID CLOSED TESTING</div>
+              <div class="test-board-tag">FREE · ANYONE WELCOME</div>
+            </div>
+
+            <div class="test-board-grid">
+              <div class="test-board-main">
+                <div>
+                  <p class="test-lead-ja">
+                    Google Play 一般公開前の先行プレイ（クローズドテスト）にご協力いただける方を募集しています。専門知識は一切不要です。普段どおりスマホで触って遊んでいただくだけで大助かりです。
+                  </p>
+                  <p class="test-lead-en">
+                    Join our pre-release closed test on Android and try Onomatopoeia Station before public launch. Free to join, leave anytime.
+                  </p>
+                </div>
+
+                <div class="test-steps">
+                  <div class="test-step-row">
+                    <div class="test-step-header">
+                      <span class="test-step-badge">STEP 01</span>
+                      <span class="test-step-title">先行プレイ用 Google グループに参加する</span>
+                    </div>
+                    <p class="test-step-desc">
+                      Googleアカウントでログインしてグループに参加します（無料・いつでも退会できます）。 / Join our tester Google Group first.
+                    </p>
+                    <div class="test-btn-row">
+                      <a href="https://groups.google.com/g/bonsaiproject2026/about" class="btn-station-blue" target="_blank" rel="noopener noreferrer">
+                        <span>▶ STEP 1: Googleグループに参加する</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="test-step-row">
+                    <div class="test-step-header">
+                      <span class="test-step-badge">STEP 02</span>
+                      <span class="test-step-title">テスト参加URL または Google Play からインストール</span>
+                    </div>
+                    <p class="test-step-desc">
+                      グループ参加後、下のボタンまたは右のQRコードからアプリをダウンロードしてお試しください。 / Opt in on the web or open directly in Google Play.
+                    </p>
+                    <div class="test-btn-row">
+                      <a href="https://play.google.com/apps/testing/com.bonsai.omp" class="btn-play-red" target="_blank" rel="noopener noreferrer">
+                        <span>▶ 先行プレイ / クローズドテスト参加URL</span>
+                      </a>
+                      <a href="https://play.google.com/store/apps/details?id=com.bonsai.omp" class="btn-station-outline" target="_blank" rel="noopener noreferrer">
+                        <span>GOOGLE PLAY で開く ↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="test-qr-pane" id="testQrPane">
+                <div class="test-qr-frame">
+                  <img src="qr_omp.png" alt="Onomatopoeia Station クローズドテスト参加者スマホ用QRコード" onerror="document.getElementById('testQrPane').style.display='none';">
+                </div>
+                <div class="test-qr-code">SCAN FOR ANDROID</div>
+                <div class="test-qr-sub">参加者スマホ用QRコード<br>（Googleグループ参加後に読取）</div>
+              </div>
+            </div>
+
+            <div class="test-board-foot">
+              <span>※ 無料アプリ（広告支援型 / Ad-supported）です。広告配信・効果測定のため広告ID（AAID）を利用します。</span>
+              <span>PACKAGE: com.bonsai.omp</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           01 OVERVIEW
+           ========================================================= -->
+      <section class="station-section" id="overview">
+        <div class="section-head-band">
+          <div class="section-title-group">
+            <span class="section-num">01</span>
+            <h2 class="section-title">OVERVIEW</h2>
+          </div>
+          <div class="section-meta">CORE FUNCTIONS / 主な機能</div>
+        </div>
+
+        <div class="section-body">
+          <div class="overview-grid">
+            <article class="overview-cell">
+              <div class="ov-tag">FEATURE 01 · INPUT</div>
+              <h3 class="ov-title">Voice &amp; Fuzzy Text Search</h3>
+              <p class="ov-en">Speak what you heard or type it in Latin, Cyrillic, Greek, or Japanese scripts. Phonetic matching finds the closest candidates immediately.</p>
+              <p class="ov-ja">聞こえたまま声で入力、またはローマ字・キリル文字・日本語で検索。音の響きから候補を素早く絞り込みます。</p>
+            </article>
+
+            <article class="overview-cell">
+              <div class="ov-tag">FEATURE 02 · SENSORY</div>
+              <h3 class="ov-title">Pronunciation, Sound &amp; Haptics</h3>
+              <p class="ov-en">Every entry pairs native Japanese pronunciation with synthesized acoustic cues and tactile vibration patterns so you feel the texture.</p>
+              <p class="ov-ja">日本語発音に加え、食感や動きを模した効果音とバイブレーションで、言葉のニュアンスを直感的に体感できます。</p>
+            </article>
+
+            <article class="overview-cell">
+              <div class="ov-tag">FEATURE 03 · MONITOR</div>
+              <h3 class="ov-title">CRT Oscilloscope Display</h3>
+              <p class="ov-en">A slim departure-board style green phosphor scope visualizes voice input and sensory playback in real time.</p>
+              <p class="ov-ja">発車標のようなスリムなCRT緑の計器窓を搭載。音声認識や体感再生の波形をリアルタイムに表示します。</p>
+            </article>
+
+            <article class="overview-cell">
+              <div class="ov-tag">FEATURE 04 · OFFLINE</div>
+              <h3 class="ov-title">On-Device ML Kit Translation</h3>
+              <p class="ov-en">Download your language pack once and translate anywhere — on subways, flights, or in remote ramen shops with zero signal.</p>
+              <p class="ov-ja">Google ML Kitのオンデバイス翻訳に対応。言語パックを一度取得すれば、通信圏外でも完全オフラインで翻訳できます。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           02 CATEGORIES & PICTOGRAMS (#1B4978 DEDICATED)
+           ========================================================= -->
+      <section class="station-section" id="categories">
+        <div class="section-head-band">
+          <div class="section-title-group">
+            <span class="section-num">02</span>
+            <h2 class="section-title">CATEGORIES</h2>
+          </div>
+          <div class="section-meta">7 SCENES · 31 PICTOGRAMS / 7分類・500語以上</div>
+        </div>
+
+        <div class="section-body">
+          <div class="cat-intro">
+            <div>
+              <p class="cat-intro-en">Filter 500+ Words Japanese onomatopoeia entries across 7 everyday and manga scenes, assisted by 31 custom station-grade pictograms.</p>
+              <p class="cat-intro-ja">日常のあらゆる場面とマンガ表現を網羅する全7カテゴリ。藍寄りブルーと白の専用ピクトグラム31種が直感的な理解を助けます。</p>
+            </div>
+            <div class="picto-count-badge">31 CUSTOM PICTOGRAMS</div>
+          </div>
+
+          <div class="category-grid">
+            <article class="cat-card">
+              <div class="cat-card-top">
+                <div class="cat-picto-wrap">
+                  <img src="img/food.png" alt="Food pictogram" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+                  <span class="cat-fallback">🍽</span>
+                </div>
+                <span class="cat-num">CAT 01</span>
+              </div>
+              <div class="cat-card-body">
+                <div>
+                  <div class="cat-name-en">FOOD</div>
+                  <div class="cat-name-ja">食事 · 食感 · 調理</div>
+                </div>
+                <div class="cat-samples">Pari-pari / Mochi-mochi / Saku-saku</div>
+              </div>
+            </article>
+
+            <article class="cat-card">
+              <div class="cat-card-top">
+                <div class="cat-picto-wrap">
+                  <img src="img/weather.png" alt="Weather pictogram" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+                  <span class="cat-fallback">☁</span>
+                </div>
+                <span class="cat-num">CAT 02</span>
+              </div>
+              <div class="cat-card-body">
+                <div>
+                  <div class="cat-name-en">WEATHER</div>
+                  <div class="cat-name-ja">天気 · 自然 · 環境音</div>
+                </div>
+                <div class="cat-samples">Zaa-zaa / Goro-goro / Shin-shin</div>
+              </div>
+            </article>
+
+            <article class="cat-card">
+              <div class="cat-card-top">
+                <div class="cat-picto-wrap">
+                  <img src="img/body.png" alt="Body pictogram" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+                  <span class="cat-fallback">✦</span>
+                </div>
+                <span class="cat-num">CAT 03</span>
+              </div>
+              <div class="cat-card-body">
+                <div>
+                  <div class="cat-name-en">BODY</div>
+                  <div class="cat-name-ja">身体 · 体調 · 感覚</div>
+                </div>
+                <div class="cat-samples">Doki-doki / Zuki-zuki / Gussuri</div>
+              </div>
+            </article>
+
+            <article class="cat-card">
+              <div class="cat-card-top">
+                <div class="cat-picto-wrap">
+                  <img src="img/emotion.png" alt="Emotion pictogram" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+                  <span class="cat-fallback">♥</span>
+                </div>
+                <span class="cat-num">CAT 04</span>
+              </div>
+              <div class="cat-card-body">
+                <div>
+                  <div class="cat-name-en">EMOTION</div>
+                  <div class="cat-name-ja">感情 · 心理 · 表情</div>
+                </div>
+                <div class="cat-samples">Waku-waku / Ira-ira / Niko-niko</div>
+              </div>
+            </article>
+
+            <article class="cat-card">
+              <div class="cat-card-top">
+                <div class="cat-picto-wrap">
+                  <img src="img/texture.png" alt="Texture pictogram" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+                  <span class="cat-fallback">▤</span>
+                </div>
+                <span class="cat-num">CAT 05</span>
+              </div>
+              <div class="cat-card-body">
+                <div>
+                  <div class="cat-name-en">TEXTURE</div>
+                  <div class="cat-name-ja">手触り · 質感 · 状態</div>
+                </div>
+                <div class="cat-samples">Fuwa-fuwa / Tsuru-tsuru / Zara-zara</div>
+              </div>
+            </article>
+
+            <article class="cat-card">
+              <div class="cat-card-top">
+                <div class="cat-picto-wrap">
+                  <img src="img/motion.png" alt="Motion pictogram" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+                  <span class="cat-fallback">➜</span>
+                </div>
+                <span class="cat-num">CAT 06</span>
+              </div>
+              <div class="cat-card-body">
+                <div>
+                  <div class="cat-name-en">MOTION</div>
+                  <div class="cat-name-ja">動き · 速度 · 動作</div>
+                </div>
+                <div class="cat-samples">Bura-bura / Kuru-kuru / Pata-pata</div>
+              </div>
+            </article>
+
+            <article class="cat-card">
+              <div class="cat-card-top">
+                <div class="cat-picto-wrap">
+                  <img src="img/manga.png" alt="Manga pictogram" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+                  <span class="cat-fallback">✹</span>
+                </div>
+                <span class="cat-num">CAT 07</span>
+              </div>
+              <div class="cat-card-body">
+                <div>
+                  <div class="cat-name-en">MANGA</div>
+                  <div class="cat-name-ja">マンガ · 効果音 · 演出</div>
+                </div>
+                <div class="cat-samples">Go-go-go / Do-do-do / Shiiin</div>
+              </div>
+            </article>
+
+            <div class="cat-card-summary">
+              <div class="cat-summary-num">500+ Words</div>
+              <div class="cat-summary-label">TOTAL ENTRIES</div>
+              <div class="cat-summary-ja">全7カテゴリ合計500語以上をオフライン辞書として完全内蔵</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           03 VISUAL GUIDE (IKEA-STYLE 6-PANEL MANUAL)
+           ========================================================= -->
+      <section class="station-section" id="guide">
+        <div class="section-head-band">
+          <div class="section-title-group">
+            <span class="section-num">03</span>
+            <h2 class="section-title">VISUAL GUIDE</h2>
+          </div>
+          <div class="section-meta">6-PANEL MANUAL / 図解ガイド</div>
+        </div>
+
+        <div class="section-body">
+          <div class="guide-grid">
+            <!-- Panel 1 -->
+            <article class="guide-panel">
+              <div class="guide-top">
+                <span class="guide-step">1</span>
+                <span class="guide-cap-en">SPEAK OR TYPE</span>
+              </div>
+              <svg class="ikea-svg" viewBox="0 0 120 100" aria-hidden="true">
+                <rect x="14" y="22" width="58" height="22" rx="4" class="fill-soft"/>
+                <line x1="22" y1="33" x2="50" y2="33" class="ink-stroke"/>
+                <line x1="54" y1="28" x2="54" y2="38" class="picto-stroke"/>
+                <rect x="78" y="20" width="28" height="26" rx="5" class="fill-rec"/>
+                <rect x="88" y="26" width="8" height="11" rx="4" class="white-stroke"/>
+                <path d="M84 34 A8 8 0 0 0 100 34" class="white-stroke"/>
+                <line x1="92" y1="42" x2="92" y2="45" class="white-stroke"/>
+                <path d="M26 66 Q36 56 46 66 T66 66" class="picto-stroke"/>
+                <path d="M74 66 H98 M92 60 L98 66 L92 72" class="picto-stroke"/>
+                <rect x="24" y="76" width="72" height="14" rx="3" class="fill-soft"/>
+                <line x1="24" y1="77" x2="96" y2="77" class="ink-stroke"/>
+              </svg>
+              <div class="guide-cap-ja">赤の録音ボタンで音声入力、またはテキスト検索</div>
+            </article>
+
+            <!-- Panel 2 -->
+            <article class="guide-panel">
+              <div class="guide-top">
+                <span class="guide-step">2</span>
+                <span class="guide-cap-en">SCENE FILTER</span>
+              </div>
+              <svg class="ikea-svg" viewBox="0 0 120 100" aria-hidden="true">
+                <rect x="12" y="24" width="20" height="20" rx="4" class="fill-picto-soft"/>
+                <rect x="37" y="24" width="20" height="20" rx="4" class="fill-picto"/>
+                <rect x="62" y="24" width="20" height="20" rx="4" class="fill-picto-soft"/>
+                <rect x="87" y="24" width="20" height="20" rx="4" class="fill-picto-soft"/>
+                <circle cx="22" cy="34" r="4" class="picto-stroke"/>
+                <path d="M47 28 L49 32 L53 34 L49 36 L47 40 L45 36 L41 34 L45 32 Z" class="white-stroke"/>
+                <line x1="68" y1="34" x2="76" y2="34" class="picto-stroke"/>
+                <polyline points="93 30 99 34 93 38" class="picto-stroke"/>
+                <line x1="47" y1="48" x2="47" y2="62" class="picto-stroke"/>
+                <polyline points="42 57 47 62 52 57" class="picto-stroke"/>
+                <rect x="22" y="68" width="76" height="20" rx="4" class="fill-soft"/>
+                <line x1="32" y1="78" x2="66" y2="78" class="ink-stroke"/>
+                <rect x="78" y="73" width="10" height="10" rx="2" class="fill-picto"/>
+              </svg>
+              <div class="guide-cap-ja">ピクトグラムをタップして7カテゴリで絞り込み</div>
+            </article>
+
+            <!-- Panel 3 -->
+            <article class="guide-panel">
+              <div class="guide-top">
+                <span class="guide-step">3</span>
+                <span class="guide-cap-en">CHECK &amp; LEARN</span>
+              </div>
+              <svg class="ikea-svg" viewBox="0 0 120 100" aria-hidden="true">
+                <rect x="24" y="18" width="78" height="58" rx="5" class="muted"/>
+                <rect x="16" y="24" width="80" height="58" rx="5" class="fill-soft"/>
+                <text x="24" y="39" font-size="9">1 / 3</text>
+                <rect x="52" y="29" width="18" height="14" rx="3" class="fill-ink"/>
+                <polyline points="57 36 60 39 66 33" class="white-stroke"/>
+                <rect x="74" y="29" width="18" height="14" rx="3" class="fill-soft"/>
+                <line x1="80" y1="33" x2="86" y2="39" class="ink-stroke"/>
+                <line x1="86" y1="33" x2="80" y2="39" class="ink-stroke"/>
+                <line x1="26" y1="56" x2="68" y2="56" class="ink-stroke"/>
+                <line x1="26" y1="68" x2="54" y2="68" class="muted"/>
+              </svg>
+              <div class="guide-cap-ja">上位候補をめくって意味と用例を確認</div>
+            </article>
+
+            <!-- Panel 4 -->
+            <article class="guide-panel">
+              <div class="guide-top">
+                <span class="guide-step">4</span>
+                <span class="guide-cap-en">LISTEN &amp; FEEL</span>
+              </div>
+              <svg class="ikea-svg" viewBox="0 0 120 100" aria-hidden="true">
+                <rect x="16" y="18" width="88" height="24" rx="4" class="fill-scope"/>
+                <path d="M22 30 Q30 22 38 30 T54 30 T70 30 T86 30 T98 30" class="wave-stroke"/>
+                <rect x="18" y="54" width="34" height="30" rx="5" class="fill-picto-soft"/>
+                <polygon points="27 65 32 65 37 60 37 78 32 73 27 73" class="picto-stroke"/>
+                <path d="M41 64 A6 6 0 0 1 41 74" class="picto-stroke"/>
+                <rect x="68" y="54" width="34" height="30" rx="5" class="fill-picto"/>
+                <rect x="79" y="60" width="12" height="18" rx="2" class="white-stroke"/>
+                <path d="M74 63 Q71 69 74 75 M96 63 Q99 69 96 75" class="white-stroke"/>
+              </svg>
+              <div class="guide-cap-ja">発音・効果音・振動とCRT波形でニュアンスを体感</div>
+            </article>
+
+            <!-- Panel 5 -->
+            <article class="guide-panel">
+              <div class="guide-top">
+                <span class="guide-step">5</span>
+                <span class="guide-cap-en">LANGUAGE SELECT</span>
+              </div>
+              <svg class="ikea-svg" viewBox="0 0 120 100" aria-hidden="true">
+                <circle cx="34" cy="36" r="14" class="picto-stroke"/>
+                <ellipse cx="34" cy="36" rx="6" ry="14" class="picto-stroke"/>
+                <line x1="20" y1="36" x2="48" y2="36" class="picto-stroke"/>
+                <rect x="56" y="24" width="50" height="24" rx="4" class="fill-picto"/>
+                <text x="64" y="40" font-size="10" class="white-txt">EN</text>
+                <polyline points="92 34 96 38 100 34" class="white-stroke"/>
+                <rect x="16" y="64" width="88" height="22" rx="4" class="fill-soft"/>
+                <line x1="17" y1="64" x2="17" y2="86" class="ink-stroke"/>
+                <text x="24" y="79" font-size="10">JP →</text>
+                <line x1="58" y1="75" x2="94" y2="75" class="ink-stroke"/>
+              </svg>
+              <div class="guide-cap-ja">全40言語・50選択肢から翻訳先をワンタップ切替</div>
+            </article>
+
+            <!-- Panel 6 -->
+            <article class="guide-panel">
+              <div class="guide-top">
+                <span class="guide-step">6</span>
+                <span class="guide-cap-en">OFFLINE MODEL</span>
+              </div>
+              <svg class="ikea-svg" viewBox="0 0 120 100" aria-hidden="true">
+                <rect x="26" y="18" width="68" height="22" rx="4" class="fill-picto-soft"/>
+                <text x="38" y="33" font-size="10" class="picto-txt">↓ 30MB</text>
+                <line x1="60" y1="44" x2="60" y2="58" class="picto-stroke"/>
+                <polyline points="54 53 60 59 66 53" class="picto-stroke"/>
+                <rect x="18" y="64" width="84" height="24" rx="4" class="fill-picto"/>
+                <text x="27" y="80" font-size="10" class="white-txt">OFFLINE ✓</text>
+              </svg>
+              <div class="guide-cap-ja">約30MBの言語モデルを取得してオフライン翻訳完了</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           04 40 LANGUAGES / 50 STATIONS BOARD
+           ========================================================= -->
+      <section class="station-section" id="languages">
+        <div class="section-head-band">
+          <div class="section-title-group">
+            <span class="section-num">04</span>
+            <h2 class="section-title">LANGUAGES</h2>
+          </div>
+          <div class="section-meta">40 LANGUAGES · 50 STATIONS / 対応言語一覧</div>
+        </div>
+
+        <div class="section-body">
+          <div class="lang-board-note">
+            <div class="lang-board-en">Every supported locale is indexed as a destination station from Japanese.</div>
+            <div class="lang-board-ja">日本語から世界40言語・50の地域バリエーションへ接続する駅ナンバリングボード</div>
+          </div>
+
+          <div class="station-lang-grid" id="stationLangGrid" aria-label="50 Supported Language Stations"></div>
+
+          <table class="spec-table" aria-label="Application Specifications">
+            <tbody>
+              <tr>
+                <th>APP NAME</th>
+                <td>Onomatopoeia Station / オノマトペステーション · OMP</td>
+              </tr>
+              <tr>
+                <th>PLATFORM</th>
+                <td>Android</td>
+              </tr>
+              <tr>
+                <th>DICTIONARY</th>
+                <td>500+ Words Japanese Onomatopoeia · 7 Categories · 31 Pictograms</td>
+              </tr>
+              <tr>
+                <th>TRANSLATION</th>
+                <td>40 Languages · 50 Locales · Google ML Kit On-Device Offline</td>
+              </tr>
+              <tr>
+                <th>PRICE</th>
+                <td>Free · Ad-Supported</td>
+              </tr>
+              <tr>
+                <th>DEVELOPER</th>
+                <td>BONSAI PROJECT · 盆栽企画</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           05 TRANSFER & INFO
+           ========================================================= -->
+      <section class="station-section" id="transfer">
+        <div class="section-head-band">
+          <div class="section-title-group">
+            <span class="section-num">05</span>
+            <h2 class="section-title">TRANSFER</h2>
+          </div>
+          <div class="section-meta">PORTAL &amp; LEGAL / 乗り換え案内</div>
+        </div>
+
+        <div class="section-body">
+          <nav class="transfer-grid" aria-label="Official Portal and Legal Documents">
+            <a href="https://mizotan.github.io/bonsaiproject/" class="transfer-card">
+              <div>
+                <div class="tr-line">LINE 01 · STUDIO HUB</div>
+                <div class="tr-title">BONSAI PROJECT</div>
+                <div class="tr-ja">盆栽企画 公式ポータル</div>
+              </div>
+              <div class="tr-arrow">↗</div>
+            </a>
+
+            <a href="https://mizotan.github.io/privacypolicy/" class="transfer-card">
+              <div>
+                <div class="tr-line">LINE 02 · PRIVACY</div>
+                <div class="tr-title">PRIVACY POLICY</div>
+                <div class="tr-ja">多言語プライバシーポリシー</div>
+              </div>
+              <div class="tr-arrow">↗</div>
+            </a>
+
+            <a href="https://mizotan.github.io/terms/" class="transfer-card">
+              <div>
+                <div class="tr-line">LINE 03 · TERMS</div>
+                <div class="tr-title">TERMS OF SERVICE</div>
+                <div class="tr-ja">多言語利用規約</div>
+              </div>
+              <div class="tr-arrow">↗</div>
+            </a>
+          </nav>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <a href="https://mizotan.github.io/bonsaiproject/" class="footer-brand">
+          <img src="rogo.png" alt="BONSAI PROJECT Logo" class="footer-logo" onerror="this.src='https://mizotan.github.io/bonsaiproject/rogo.png'">
+          <div>
+            <div class="footer-brand-name">BONSAI PROJECT · 盆栽企画</div>
+            <div class="footer-brand-sub">INDEPENDENT MOBILE APP STUDIO · JAPAN</div>
+          </div>
+        </a>
+        <div class="footer-right">
+          <div>CONTACT: <a href="mailto:bonsai.project.2026@gmail.com">bonsai.project.2026@gmail.com</a></div>
+          <div>&copy; 2026 BONSAI PROJECT · All Rights Reserved.</div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- =========================================================
+         RIGHT FIXED STATION NAVIGATION RAIL
+         ========================================================= -->
+    <aside class="side-rail" id="sideRail" aria-label="Station Index Navigation">
+      <div>
+        <div class="rail-head">
+          <div class="rail-code">STATION INDEX</div>
+          <div class="rail-title">OMP · 07</div>
+        </div>
+
+        <nav class="rail-nav">
+          <a href="#top" class="rail-link">
+            <span class="rail-num">TOP</span>
+            <span class="rail-label">HOME</span>
+          </a>
+          <a href="#closed-test" class="rail-link rail-link-accent">
+            <span class="rail-num">00</span>
+            <span class="rail-label">CLOSED TEST</span>
+          </a>
+          <a href="#overview" class="rail-link">
+            <span class="rail-num">01</span>
+            <span class="rail-label">OVERVIEW</span>
+          </a>
+          <a href="#categories" class="rail-link">
+            <span class="rail-num">02</span>
+            <span class="rail-label">CATEGORIES</span>
+          </a>
+          <a href="#guide" class="rail-link">
+            <span class="rail-num">03</span>
+            <span class="rail-label">VISUAL GUIDE</span>
+          </a>
+          <a href="#languages" class="rail-link">
+            <span class="rail-num">04</span>
+            <span class="rail-label">40 LANGUAGES</span>
+          </a>
+          <a href="#transfer" class="rail-link">
+            <span class="rail-num">05</span>
+            <span class="rail-label">TRANSFER</span>
+          </a>
+        </nav>
+
+        <div class="rail-sub-links">
+          <a href="https://mizotan.github.io/bonsaiproject/"><span>PORTAL</span><span>↗</span></a>
+          <a href="https://mizotan.github.io/privacypolicy/"><span>PRIVACY</span><span>↗</span></a>
+          <a href="https://mizotan.github.io/terms/"><span>TERMS</span><span>↗</span></a>
+          <a href="mailto:bonsai.project.2026@gmail.com"><span>CONTACT</span><span>↗</span></a>
+        </div>
+      </div>
+
+      <div class="rail-vertical-sign" aria-hidden="true">
+        <div class="rail-vertical-text">ONOMATOPOEIA STATION</div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---------------------------------------------------------
+         1. 50 LANGUAGE STATIONS DATA (Synced with languages.json)
+         --------------------------------------------------------- */
+      const STATIONS = [
+        { code: 'en-US', label: 'English · US' },
+        { code: 'en-GB', label: 'English · UK' },
+        { code: 'en-AU', label: 'English · Australia' },
+        { code: 'en-CA', label: 'English · Canada' },
+        { code: 'en-IN', label: 'English · India' },
+        { code: 'en-SG', label: 'English · Singapore' },
+        { code: 'en-ZA', label: 'English · South Africa' },
+        { code: 'ja',    label: '日本語' },
+        { code: 'es-ES', label: 'Español · España' },
+        { code: 'es-419',label: 'Español · Latinoamérica' },
+        { code: 'es-US', label: 'Español · US' },
+        { code: 'pt-PT', label: 'Português · Portugal' },
+        { code: 'pt-BR', label: 'Português · Brasil' },
+        { code: 'fr-FR', label: 'Français · France' },
+        { code: 'fr-CA', label: 'Français · Canada' },
+        { code: 'de',    label: 'Deutsch' },
+        { code: 'it',    label: 'Italiano' },
+        { code: 'nl',    label: 'Nederlands' },
+        { code: 'pl',    label: 'Polski' },
+        { code: 'sv',    label: 'Svenska' },
+        { code: 'no',    label: 'Norsk' },
+        { code: 'da',    label: 'Dansk' },
+        { code: 'fi',    label: 'Suomi' },
+        { code: 'cs',    label: 'Čeština' },
+        { code: 'sk',    label: 'Slovenčina' },
+        { code: 'hu',    label: 'Magyar' },
+        { code: 'ro',    label: 'Română' },
+        { code: 'hr',    label: 'Hrvatski' },
+        { code: 'sl',    label: 'Slovenščina' },
+        { code: 'tr',    label: 'Türkçe' },
+        { code: 'lt',    label: 'Lietuvių' },
+        { code: 'lv',    label: 'Latviešu' },
+        { code: 'et',    label: 'Eesti' },
+        { code: 'sq',    label: 'Shqip' },
+        { code: 'is',    label: 'Íslenska' },
+        { code: 'ca',    label: 'Català' },
+        { code: 'gl',    label: 'Galego' },
+        { code: 'ga',    label: 'Gaeilge' },
+        { code: 'cy',    label: 'Cymraeg' },
+        { code: 'mt',    label: 'Malti' },
+        { code: 'ru',    label: 'Русский' },
+        { code: 'uk',    label: 'Українська' },
+        { code: 'bg',    label: 'Български' },
+        { code: 'be',    label: 'Беларуская' },
+        { code: 'mk',    label: 'Македонски' },
+        { code: 'el',    label: 'Ελληνικά' },
+        { code: 'id',    label: 'Bahasa Indonesia' },
+        { code: 'ms',    label: 'Bahasa Melayu' },
+        { code: 'tl',    label: 'Filipino' },
+        { code: 'vi',    label: 'Tiếng Việt' }
+      ];
+
+      // Render Departure Ticker (duplicated for seamless loop)
+      const tickerTrack = document.getElementById('tickerTrack');
+      if (tickerTrack) {
+        const buildTickerHtml = () => STATIONS.map((s) =>
+          '<span class="ticker-item"><span class="ticker-code">' + s.code.toUpperCase() + '</span><span>' + s.label + '</span></span>'
+        ).join('');
+        tickerTrack.innerHTML = buildTickerHtml() + buildTickerHtml();
+      }
+
+      // Render 50 Stations Board
+      const langGrid = document.getElementById('stationLangGrid');
+      if (langGrid) {
+        langGrid.innerHTML = STATIONS.map((s, idx) => {
+          const num = String(idx + 1).padStart(2, '0');
+          return (
+            '<div class="station-lang-cell">' +
+              '<div class="station-lang-left">' +
+                '<span class="st-no">' + num + '</span>' +
+                '<span class="st-name">' + s.label + '</span>' +
+              '</div>' +
+              '<span class="st-code">' + s.code + '</span>' +
+            '</div>'
+          );
+        }).join('');
+      }
+
+      /* ---------------------------------------------------------
+         2. MOBILE DRAWER MENU
+         --------------------------------------------------------- */
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const sideRail = document.getElementById('sideRail');
+      if (mobileBtn && sideRail) {
+        mobileBtn.addEventListener('click', () => {
+          const open = sideRail.classList.toggle('is-open');
+          mobileBtn.setAttribute('aria-expanded', String(open));
+          mobileBtn.textContent = open ? 'CLOSE' : 'INDEX';
+        });
+        sideRail.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            sideRail.classList.remove('is-open');
+            mobileBtn.setAttribute('aria-expanded', 'false');
+            mobileBtn.textContent = 'INDEX';
+          });
+        });
+      }
+
+      /* ---------------------------------------------------------
+         3. CRT OSCILLOSCOPE + ONOMATOPOEIA AUDIO DEMO
+         --------------------------------------------------------- */
+      const canvas = document.getElementById('scopeCanvas');
+      const bezel = document.getElementById('scopeBezel');
+      const scopeLabel = document.getElementById('scopeLabel');
+      const scopeWord = document.getElementById('scopeWord');
+      const ctx = canvas ? canvas.getContext('2d') : null;
+
+      let activeMode = 'idle';
+      let modeEndTime = 0;
+      let phase = 0;
+      let audioCtx = null;
+
+      function resizeCanvas() {
+        if (!canvas || !ctx) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+        canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      function getAudio() {
+        if (!audioCtx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioCtx();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function playDemoSound(mode) {
+        try {
+          const ac = getAudio();
+          const now = ac.currentTime;
+
+          if (mode === 'paripari') {
+            [0, 0.09, 0.19, 0.28].forEach((offset, i) => {
+              const osc = ac.createOscillator();
+              const gain = ac.createGain();
+              osc.type = 'sawtooth';
+              osc.frequency.setValueAtTime(1400 + i * 180, now + offset);
+              osc.frequency.exponentialRampToValueAtTime(320, now + offset + 0.045);
+              gain.gain.setValueAtTime(0.001, now + offset);
+              gain.gain.linearRampToValueAtTime(0.18, now + offset + 0.004);
+              gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.05);
+              osc.connect(gain);
+              gain.connect(ac.destination);
+              osc.start(now + offset);
+              osc.stop(now + offset + 0.055);
+            });
+            if (navigator.vibrate) navigator.vibrate([18, 40, 18, 40, 22]);
+          } else if (mode === 'mochimochi') {
+            [0, 0.24].forEach((offset) => {
+              const osc = ac.createOscillator();
+              const gain = ac.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(150, now + offset);
+              osc.frequency.exponentialRampToValueAtTime(280, now + offset + 0.09);
+              osc.frequency.exponentialRampToValueAtTime(135, now + offset + 0.21);
+              gain.gain.setValueAtTime(0.001, now + offset);
+              gain.gain.linearRampToValueAtTime(0.22, now + offset + 0.03);
+              gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.22);
+              osc.connect(gain);
+              gain.connect(ac.destination);
+              osc.start(now + offset);
+              osc.stop(now + offset + 0.24);
+            });
+            if (navigator.vibrate) navigator.vibrate([55, 70, 55]);
+          } else if (mode === 'gorogoro') {
+            const osc = ac.createOscillator();
+            const lfo = ac.createOscillator();
+            const lfoGain = ac.createGain();
+            const gain = ac.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(68, now);
+            lfo.frequency.setValueAtTime(9, now);
+            lfoGain.gain.setValueAtTime(18, now);
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.26, now + 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
+            osc.connect(gain);
+            gain.connect(ac.destination);
+            osc.start(now);
+            lfo.start(now);
+            osc.stop(now + 0.68);
+            lfo.stop(now + 0.68);
+            if (navigator.vibrate) navigator.vibrate([90, 40, 90, 40, 120]);
+          } else if (mode === 'kirakira') {
+            [1046.5, 1318.5, 1568.0, 2093.0].forEach((freq, i) => {
+              const offset = i * 0.085;
+              const osc = ac.createOscillator();
+              const gain = ac.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(freq, now + offset);
+              gain.gain.setValueAtTime(0.001, now + offset);
+              gain.gain.linearRampToValueAtTime(0.14, now + offset + 0.01);
+              gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.22);
+              osc.connect(gain);
+              gain.connect(ac.destination);
+              osc.start(now + offset);
+              osc.stop(now + offset + 0.24);
+            });
+            if (navigator.vibrate) navigator.vibrate([12, 30, 12, 30, 12]);
+          }
+        } catch (e) {}
+      }
+
+      const DEMO_LABELS = {
+        paripari: 'PARI-PARI · CRISP SNAP',
+        mochimochi: 'MOCHI-MOCHI · SOFT BOUNCE',
+        gorogoro: 'GORO-GORO · LOW RUMBLE',
+        kirakira: 'KIRA-KIRA · SPARKLE CHIME'
+      };
+
+      const demoBtns = document.querySelectorAll('.demo-word-btn');
+      demoBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const mode = btn.getAttribute('data-demo');
+          activeMode = mode;
+          modeEndTime = performance.now() + 1100;
+          demoBtns.forEach((b) => b.classList.toggle('is-active', b === btn));
+          if (bezel) bezel.classList.add('is-playback');
+          if (scopeLabel) scopeLabel.textContent = 'PLAYBACK';
+          if (scopeWord) scopeWord.textContent = DEMO_LABELS[mode] || 'PLAYBACK';
+          playDemoSound(mode);
+        });
+      });
+
+      function drawScope(ts) {
+        if (!canvas || !ctx) return;
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        const mid = h / 2;
+
+        if (activeMode !== 'idle' && ts > modeEndTime) {
+          activeMode = 'idle';
+          demoBtns.forEach((b) => b.classList.remove('is-active'));
+          if (bezel) bezel.classList.remove('is-playback');
+          if (scopeLabel) scopeLabel.textContent = 'READY';
+          if (scopeWord) scopeWord.textContent = 'STANDBY · 440HZ REF';
+        }
+
+        // Background
+        ctx.fillStyle = '#07100A';
+        ctx.fillRect(0, 0, w, h);
+
+        // Subtle CRT grid
+        ctx.strokeStyle = 'rgba(51, 255, 102, 0.12)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, mid);
+        ctx.lineTo(w, mid);
+        for (let x = 40; x < w; x += 40) {
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, h);
+        }
+        ctx.stroke();
+
+        // Waveform
+        ctx.strokeStyle = '#33FF66';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+
+        for (let x = 0; x <= w; x += 2) {
+          const t = (x / w) * Math.PI * 2;
+          let y = mid;
+
+          if (activeMode === 'idle') {
+            y = mid + Math.sin(t * 3 + phase) * 5 + Math.sin(t * 7 - phase * 1.4) * 2;
+          } else if (activeMode === 'paripari') {
+            const spike = Math.sin(t * 18 + phase * 3.5);
+            y = mid + (spike > 0 ? 1 : -1) * Math.pow(Math.abs(spike), 0.5) * 18 * Math.sin(t * 3 + phase);
+          } else if (activeMode === 'mochimochi') {
+            y = mid + Math.sin(t * 4 + phase * 1.8) * 19 * Math.abs(Math.cos(phase * 0.6));
+          } else if (activeMode === 'gorogoro') {
+            y = mid + Math.sin(t * 2.5 + phase * 2.2) * 20 + Math.sin(t * 11 + phase * 5) * 6;
+          } else if (activeMode === 'kirakira') {
+            y = mid + Math.sin(t * 14 + phase * 3.2) * 14 * Math.sin(t * 2 + phase * 0.8);
+          }
+
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        phase += activeMode === 'idle' ? 0.045 : 0.14;
+        requestAnimationFrame(drawScope);
+      }
+
+      requestAnimationFrame(drawScope);
+    })();
+  </script>
+</body>
+</html>
